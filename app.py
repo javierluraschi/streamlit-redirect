@@ -13,17 +13,12 @@ def inject_redirect():
   window.location.href = 'https://hal9.com/';
 </script>
 """
-
     index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    soup = BeautifulSoup(index_path.read_text(), features="lxml")
-    if not soup.find(id=SR_ID):
-        bck_index = index_path.with_suffix('.bck')
-        if bck_index.exists():
-            shutil.copy(bck_index, index_path)
-        else:
-            shutil.copy(index_path, bck_index)
-        html = str(soup)
-        new_html = html.replace('<head>', '<head>\n' + SR_JS)
-        index_path.write_text(new_html)
+    with open(index_path, 'r') as file:
+    	file_contents = file.read()
+    if not 'streamlit_redirect' in file_contents:
+    	file_contents = file_contents.replace('<body>', '<body>' + SR_JS)
+    	with open(index_path, 'w') as file:
+    		file.write(file_contents)
 
 inject_redirect()
