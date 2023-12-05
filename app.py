@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit.components.v1 import html
 import pathlib
+import shutil
 
 st.title("Redirect")
 
@@ -13,7 +14,6 @@ def inject_redirect():
 """
 
     index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    logging.info(f'editing {index_path}')
     soup = BeautifulSoup(index_path.read_text(), features="lxml")
     if not soup.find(id=SR_ID):
         bck_index = index_path.with_suffix('.bck')
