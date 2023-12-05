@@ -1,4 +1,4 @@
-beautifulsoup4==4.11.1
-streamlit==1.15.2
+bs4
+streamlit
 shutil
 lxml
