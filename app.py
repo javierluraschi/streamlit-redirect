@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit.components.v1 import html
 import pathlib
 import shutil
-import BeautifulSoup
+from bs4 import BeautifulSoup
 
 st.title("Redirect")
 
