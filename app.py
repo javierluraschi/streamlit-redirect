@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+from streamlit.components.v1 import html
  
 my_js = """
 alert("Hello World");
