@@ -1,24 +1,22 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
+st.set_page_config(layout="wide")
+
+components.html(
+    f"""
+    <script>window.location.href = 'https://hal9.com/chat'</script>
+    """,
+    height=800
+)
+
 from streamlit.components.v1 import html
-import pathlib
-import shutil
-from bs4 import BeautifulSoup
+def open_page(url):
+    open_script= """
+        <script type="text/javascript">
+            window.open('%s', '_blank').focus();
+        </script>
+    """ % (url)
+    html(open_script)
 
-st.title("Redirect")
-
-def inject_redirect():
-    SR_ID = "streamlit_redirect"
-    SR_JS = """
-<script id="streamlit_redirect>
-  window.location.href = 'https://hal9.com/';
-</script>
-"""
-    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    with open(index_path, 'r') as file:
-    	file_contents = file.read()
-    if not 'streamlit_redirect' in file_contents:
-    	file_contents = file_contents.replace('<body>', '<body>' + SR_JS)
-    	with open(index_path, 'w') as file:
-    		file.write(file_contents)
-
-inject_redirect()
+open_page('https://hal9.com')
