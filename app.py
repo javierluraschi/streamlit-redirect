@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit.components.v1 import html
 from pathlib import Path
 
-st.title("Redirect")
+st.title("Streamlit Redirect")
 
 def inject_redirect():
     SR_ID = "streamlit_redirect"
